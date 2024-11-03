@@ -1,0 +1,460 @@
+ex1:
+#include<iostream>
+using namespace std;
+class complex {
+    private :
+     float reel,ima;
+public :
+float get_reel(){
+    return reel; 
+} 
+float get_ima(){
+    return ima;
+}
+ complex(){
+    reel = 0;
+    ima = 0;
+ }
+ complex (float a , float b){
+    reel = a;
+    ima = b;
+ }
+ friend complex add(complex y, complex z);
+ friend void egal(complex y , complex z);
+ friend complex sus(complex y, complex z);
+ friend complex div(complex y , complex z);
+ friend complex mult(complex y , complex z);
+ friend void egal(complex y,complex z);
+};
+ complex add(complex e , complex f ){
+   complex g;
+   g.reel = e.reel+f.reel;
+   g.ima = e.ima + f.ima;
+   return g;
+ }
+ void egal(complex t,complex r){
+    if( t.reel==r.reel && t.ima==r.ima)
+    cout<<"il y a egalite "<<endl;
+    else
+    cout<<"pas d' egalite "<<endl;
+ }
+ complex sus(complex w,complex v){
+    complex g ;
+    g.reel=w.reel-v.reel;
+    g.ima=w.ima-v.ima;
+   return g;
+ }
+ complex mult(complex u,complex n){
+    complex g;
+    g.reel=(u.reel*n.reel)+(u.ima*n.ima);
+    g.ima=(u.reel*n.ima)+(u.ima*n.reel); 
+    return g;
+ }
+ complex div(complex r,complex q){
+    complex g;
+    float a , b ,c,d;
+    a=b=c=d=0;
+    if(q.reel==0 && q.ima==0){
+    cout<<"nta mrid wakila"<<endl;
+    }
+    else if(q.ima==0){
+    g.reel=r.reel/q.reel;
+    g.ima=r.ima/q.reel;
+    }
+    else{
+        if(r.ima!=0)
+        a=(r.reel*q.reel)-(r.ima*q.ima);
+        else
+        a=(r.reel*q.reel)+(r.ima*q.ima);
+        b=(r.reel*q.ima)+(r.ima*q.reel);
+        c=(q.reel*q.reel)-(q.ima*q.ima);
+        g.reel=a/c;
+        g.ima=b/c;
+    }
+  return g;
+ }
+ int main(){
+    float a,b,r,d;
+    int e;
+    cout<<"choisit parti reel de nbr 1 : "<<endl;
+    cin>>a;
+    cout<<"choisit parti imaginair de nbr 1 : "<<endl;
+    cin>>b;
+    cout<<"choisit parti reel de nbr 2 : "<<endl;
+    cin>>r;
+    cout<<"choisit parti imaginaire de nbr 2 : "<<endl;
+    cin>>d;
+    complex h(a,b),m(r,d);           
+    int c;
+    do{
+    cout <<"Veuillez choisir l'un des operations suivant : "<<endl;
+    cout <<"--------Menu----------- "<<endl;
+    cout <<"1-egalite"<<endl;
+    cout <<"2-addition"<<endl;
+    cout <<"3-sustraction"<<endl;
+    cout <<"4-multiplication"<<endl;
+    cout <<"5-division"<<endl;
+    cout <<"0-EXIT"<<endl;
+    cin>>c;
+    switch (c)
+    {
+    case 1 : egal(h,m);
+        break;
+    case 2 :{ complex o = add(h,m);
+            cout<<"l'addition de deux complex est : "<<o.get_reel()<<"+"<<o.get_ima()<<"i"<<endl;
+            break;
+    }
+    case 3 :{complex p = sus(h,m);
+            cout<<"la sustraction de deux complex est : "<<p.get_reel()<<"+"<<p.get_ima()<<"i"<<endl;
+            break;
+    }
+    case 4 : {
+            complex a=mult(h,m); 
+            cout<<"la multiplication de deux complex est : "<<a.get_reel()<<"+"<<a.get_ima()<<"i"<<endl;
+            break;
+    }
+    case 5 :{ 
+            complex k=div(h,m); 
+            cout<<"la division de deux complex est : "<<k.get_reel()<<"+"<<k.get_ima()<<"i"<<endl;
+            break;
+    }                                        
+    default :{ cout<<"entre un nombre entre 0 et 5 !!!!!!"<<endl;
+        break;
+    }
+    }
+    }while (c!=0);
+    return 0;
+ }
+EX02:
+#include<iostream>
+#include<cstring>
+using namespace std;
+class zebra;
+class delphine;
+class animal {
+   string nome;
+   int age;
+public :
+ animal(){
+    this->nome="vide";
+    this->age = 0;
+ }
+ void set_value(string a,int b){
+    this->nome=a;
+    this->age=b;
+ }
+ friend class zebra ;
+ friend class delphin;
+};
+class zebra{
+   string lieu;
+   animal a;
+   public:
+   zebra(){
+    lieu="vide";
+   }
+  void set_val(string m){
+    lieu = m;
+  }
+void remplir(){
+   string q,c;
+   int o;
+   cout<<"saisir le nome : "<<endl;
+   cin>>q;
+   cout<<"saisir l'age : "<<endl;
+   cin>>o;
+   cout<<"saisir le lieu : "<<endl;
+   cin>>c;
+   a.set_value(q,o);
+   set_val(c);
+}
+void display_zebra();
+string get_nom(){
+   return a.nome;
+}
+string get_lieu(){
+   return lieu;
+}
+int get_age(){
+   return a.age;
+}
+};
+class delphin{
+     string lieu;
+   animal a;
+   public:
+   delphin(){
+    lieu="vide";
+   }
+  void set_val(string m){
+    lieu = m;
+  }
+void remplir(){
+   string q,c;
+   int o;
+   cout<<"saisir le nome : "<<endl;
+   cin>>q;
+   cout<<"saisir l'age : "<<endl;
+   cin>>o;
+   cout<<"saisir le lieu : "<<endl;
+   cin>>c;
+   a.set_value(q,o);
+   set_val(c);
+}
+string get_nom(){
+   return a.nome;
+}
+string get_lieu(){
+   return lieu;
+}
+int get_age(){
+   return a.age;
+}
+void display_deph();
+};
+void delphin::display_deph(){
+   cout<<"le nome de delphine est :"<<get_nom()<<endl;
+   cout<<"l'age de delphine est : "<<get_age()<<endl;
+   cout<<"le lieu de delphine est : "<<get_lieu()<<endl;
+}
+void zebra::display_zebra(){
+   cout<<"le nome de zebra est : "<<get_nom()<<endl;
+   cout<<"l'age de zebra est : "<<get_age()<<endl;
+   cout<<"le lieu de zebra est : "<<get_lieu()<<endl;
+}
+int main(){
+   zebra a ;
+   delphin b;
+   a.remplir();
+   b.remplir();
+   a.display_zebra();
+   b.display_deph();
+return 0;
+}
+ex03:
+#include<iostream>
+#include<cstring>
+using namespace std;
+struct date{
+   int day;
+   int month;
+   int annee;
+};
+class personne
+{
+protected:
+  string nome;
+  string prenom;
+  string d1;
+public:
+      personne(){
+      nome="vide";
+      prenom="vide";
+      d1="vide";
+      }
+      personne(string n,string p,string d2){
+         nome=n;
+         prenom=p;
+         d1=d2;
+      }
+      virtual void affich(personne e){
+        cout<<"nome:"<<e.nome<<endl;
+        cout<<"prenom:"<<e.prenom<<endl;
+        cout<<"de de naissance : "<<e.d1<<endl;
+      }
+   ~personne(){
+      cout<<"destroy0"<<endl;
+   }
+};
+
+class employ:public personne
+{
+   protected :
+   float salair ;
+   public:
+   employ(){
+      salair=0;
+   }
+   employ(string n , string p , string d , float s){
+      salair=s;
+      nome = n;
+      prenom=p;
+      d1=d;
+   }
+   void affich(employ f){
+        cout<<"nome:"<<f.nome<<endl;
+        cout<<"prenom:"<<f.prenom<<endl;
+        cout<<"date de naissance : "<<f.d1<<endl;
+        cout<<"salaire est :"<<f.salair<<endl;
+  }
+ ~employ(){
+   cout<<"destroy1"<<endl;
+ }
+};
+class chef : public employ {
+   protected :
+   string service;
+   public:
+   chef(){
+      service="vide";
+   }
+   chef(string h ,string l,string s,float p,string z){
+      nome=h;
+      prenom=l;
+      d1=s;
+      salair = p;
+      service=z;
+   }
+   void affich(chef k){
+        cout<<"nome:"<<k.nome<<endl;
+        cout<<"prenom:"<<k.prenom<<endl;
+        cout<<"date de naissance : "<<k.d1<<endl;
+        cout<<"salaire est :"<<k.salair<<endl;
+        cout<<"son service est :"<<k.service<<endl;
+   }
+   ~chef(){
+       cout<<"derstoy2"<<endl;
+   }
+};
+class direct:public chef{
+  protected:
+      string soc;
+  public:
+    direct(){
+     soc="vide";
+    }
+    direct(string h ,string l,string s,float p,string z,string w){
+      nome=h;
+      prenom=l;
+      d1=s;
+      salair = p;
+      service=z;
+      soc=w;
+    }
+    void affich(direct k){
+       cout<<"nome:"<<k.nome<<endl;
+        cout<<"prenom:"<<k.prenom<<endl;
+        cout<<"date de naissance : "<<k.d1<<endl;
+        cout<<"salaire est :"<<k.salair<<endl;
+        cout<<"son service est :"<<k.service<<endl;
+
+    }
+       ~direct(){
+       cout<<"derstoy3"<<endl;
+   }
+};
+int main(){
+  personne e("ahmed","med","23-04-2003");
+  e.affich(e);
+  employ u("imad","ntifi","3445",1999);
+  e.affich(u);
+  chef k("ali","median","1234",55666,"IT manager");
+  e.affich(k);
+  direct v("sefiane","taalabi","25-05-2003",20000,"moul chi","medi1tv");
+  e.affich(v);
+  return 0;
+}
+
+ex04:
+#include <iostream>
+#include <cmath>
+using namespace std;
+class Vecteur3D {
+private:
+    float x, y, z;
+
+public:
+    Vecteur3D(float x = 0.0f, float y = 0.0f, float z = 0.0f) : x(x), y(y), z(z) {}
+    void afficher() const {
+        cout<< "(" << x << ", " << y << ", " << z << ")" << endl;
+    }
+
+    // Somme de deux vecteurs
+    Vecteur3D somme(const Vecteur3D &v) const {
+        return Vecteur3D(x + v.x, y + v.y, z + v.z);
+    }
+
+    float produitScalaire(const Vecteur3D &v) const {
+        return x * v.x + y * v.y + z * v.z;
+    }
+
+    bool coincide(const Vecteur3D &v) const {
+        return (x == v.x && y == v.y && z == v.z);
+    }
+    float norme() const {
+        return std::sqrt(x * x + y * y + z * z);
+    }
+    Vecteur3D normaxParValeur(const Vecteur3D &v) const {
+        return (this->norme() > v.norme()) ? *this : v;
+    }
+    const Vecteur3D* normaxParAdresse(const Vecteur3D *v) const {
+        return (this->norme() > v->norme()) ? this : v;
+    }
+    const Vecteur3D& normaxParReference(const Vecteur3D &v) const {
+        return (this->norme() > v.norme()) ? *this : v;
+    }
+};
+
+int main() {
+    Vecteur3D v1(3.0f, 4.0f, 5.0f);
+    Vecteur3D v2(1.0f, 2.0f, 3.0f);
+    cout << "Vecteur 1 : ";
+    v1.afficher();
+    cout << "Vecteur 2 : ";
+    v2.afficher();
+    Vecteur3D somme = v1.somme(v2);
+    cout << "Somme des vecteurs : ";
+    somme.afficher();
+    cout << "Produit scalaire : " << v1.produitScalaire(v2) << endl;
+    cout << "Les vecteurs coïncident : " << (v1.coincide(v2) ? "Oui" : "Non") << endl;
+    cout << "Norme du vecteur 1 : " << v1.norme() <<endl;
+    cout << "Norme du vecteur 2 : " << v2.norme() <<endl;
+    Vecteur3D normaxVal = v1.normaxParValeur(v2);
+    cout << "Normax (par valeur) : ";
+    normaxVal.afficher();
+    const Vecteur3D* normaxAddr = v1.normaxParAdresse(&v2);
+    cout << "Normax (par adresse) : ";
+    normaxAddr->afficher();
+    const Vecteur3D& normaxRef = v1.normaxParReference(v2);
+    cout << "Normax (par référence) : ";
+    normaxRef.afficher();
+
+    return 0;
+}
+ex05:
+#include <iostream>
+using namespace std;
+
+class Test {
+private:
+    static int compteurAppels;
+
+public:
+    void call() {
+        compteurAppels++;
+        cout << "Fonction call() appelée " << compteurAppels << " fois." << endl;
+    }
+
+    static int getCompteurAppels() {
+        return compteurAppels;
+    }
+};
+
+int Test::compteurAppels = 0;
+
+int main() {
+    Test t1, t2;
+
+    t1.call();
+    t1.call();
+    t2.call();
+    t2.call();
+    t1.call();
+
+    cout << "La fonction call() a été appelée au total " << Test::getCompteurAppels() << " fois." << endl;
+
+    return 0;
+}
+ex06:
+
+
